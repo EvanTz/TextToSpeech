@@ -15,7 +15,7 @@ public class Text2SpeechEditorView {
 		JPanel panel = new JPanel();
 		
 		JButton button = new JButton("Open file");
-		
+		button.setBounds(2,2,2,2);  
 		
 		panel.setBorder(BorderFactory.createEmptyBorder(100,100,70,100));
 		panel.setLayout(new GridLayout(0,1));
