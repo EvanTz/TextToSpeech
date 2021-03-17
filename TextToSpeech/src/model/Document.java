@@ -25,14 +25,17 @@ public class Document {
 		
 	}
 	public void setDocReaderFactory(DocumentReaderFactory drf) {
-		
+		this.docReaderFactory = drf;
 	}
 	public void setDocWriterFactory(DocumentWriterFactory dwf) {
 		
 	}
 	
-	public void open(String str1, String str2, String str3) {
-		
+	public void open(String docPath, String docType, String docEncoding) {
+		//documentReader = docReaderFactory.createReader(docPath, docType, docEncoding);
+		System.out.println(docPath);
+		System.out.println(docType);
+		System.out.println(docEncoding);
 	}
 	
 	public void playContents() {
