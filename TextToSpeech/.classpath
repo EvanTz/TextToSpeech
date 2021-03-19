@@ -24,5 +24,6 @@
 	<classpathentry kind="lib" path="lib/poi-5.0.0/poi-excelant-5.0.0.jar"/>
 	<classpathentry kind="lib" path="lib/poi-5.0.0/poi-integration-5.0.0.jar"/>
 	<classpathentry kind="lib" path="lib/poi-5.0.0/poi-scratchpad-5.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/poi-5.0.0/poi-ooxml-5.0.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
