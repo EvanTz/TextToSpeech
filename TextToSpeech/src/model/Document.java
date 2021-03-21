@@ -37,12 +37,12 @@ public class Document {
 		//System.out.println(docType);
 		//System.out.println(docEncoding);
 		
-		//documentReader = docReaderFactory.createReader(docPath, docType, docEncoding);
-		//contents = (ArrayList<String>) documentReader.read();
+		documentReader = docReaderFactory.createReader(docPath, docType, docEncoding);
+		contents = (ArrayList<String>) documentReader.read();
 		
 		// TODO test
-		contents = new ArrayList<String>();
-		contents.addAll(Arrays.asList("this","is","a","test",docPath,docType,docEncoding));
+		//contents = new ArrayList<String>();
+		//contents.addAll(Arrays.asList("this","is","a","test",docPath,docType,docEncoding));
 	}
 	
 	public ArrayList<String> getContents(){
