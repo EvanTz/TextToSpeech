@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import input.DocumentReader;
 import input.DocumentReaderFactory;
@@ -18,7 +19,7 @@ public class Document {
 	
 
 	public Document() {
-		// TODO Auto-generated constructor stub
+		docReaderFactory = new DocumentReaderFactory();
 	}
 	
 	public void setAudioManager(TTSFacade tts) {
@@ -32,10 +33,21 @@ public class Document {
 	}
 	
 	public void open(String docPath, String docType, String docEncoding) {
-		//documentReader = docReaderFactory.createReader(docPath, docType, docEncoding);
-		System.out.println(docPath);
-		System.out.println(docType);
-		System.out.println(docEncoding);
+		//System.out.println(docPath);
+		//System.out.println(docType);
+		//System.out.println(docEncoding);
+		
+		documentReader = docReaderFactory.createReader(docPath, docType, docEncoding);
+		contents = (ArrayList<String>) documentReader.read();
+		
+		// TODO test
+		//contents = new ArrayList<String>();
+		//contents.addAll(Arrays.asList("this","is","a","test",docPath,docType,docEncoding));
+		
+	}
+	
+	public ArrayList<String> getContents(){
+		return this.contents;
 	}
 	
 	public void playContents() {
