@@ -14,10 +14,10 @@ public class DocumentReaderFactory {
 		// TODO should word reader and excel reader take as input the path of the document ????????? :  WordReader(docPath) ExcelReader(docPath)
 		
 		if (docType == "docx") {
-			docReader = new WordReader();
+			docReader = new WordReader(docPath);
 		}
 		else if(docType == "xlsx") {
-			docReader = new ExcelReader();
+			docReader = new ExcelReader(docPath);
 		}
 		
 		if(docEncoding == "Atbash") {
@@ -27,6 +27,9 @@ public class DocumentReaderFactory {
 		else if(docEncoding == "Rot13") {
 			readerRot13Decorator = new ReaderRot13Decorator(docReader);
 			return readerRot13Decorator;
+		}
+		else if(docEncoding == "None") {  // Decorator not required
+			return docReader;
 		}
 		return null;
 	}

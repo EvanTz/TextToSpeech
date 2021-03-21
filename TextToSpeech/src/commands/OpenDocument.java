@@ -39,6 +39,7 @@ public class OpenDocument implements ActionListener{
 		int returnVal = chooseFile.showOpenDialog(null);
 		
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			
 			String inputDoc = chooseFile.getSelectedFile().getAbsolutePath();
 			
 			//System.out.println("Document selected: " + inputDoc);
@@ -57,13 +58,16 @@ public class OpenDocument implements ActionListener{
 				doc.open(inputDoc, "xlsx", encoding);
 				
 				
+				
 				// TODO this should be implemented in a private method ideally
+				table.setCellSelectionEnabled(true);
 				model.setColumnCount(getDocument().getContents().size());
 				model.setRowCount(1);
 				
 				for (String i : getDocument().getContents()){
 					model.setValueAt(i, 0, getDocument().getContents().indexOf(i)); }
 				 
+				
 				
 				scroll.setVisible(true);
 				scroll.setViewportView(table);
