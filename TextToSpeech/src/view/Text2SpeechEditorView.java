@@ -11,6 +11,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -33,7 +34,7 @@ public class Text2SpeechEditorView implements ActionListener{
 	private JButton button;
 	private JButton saveButton;
 	private JScrollPane scroll;
-	
+	private JLabel encodingLabel;
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -41,12 +42,12 @@ public class Text2SpeechEditorView implements ActionListener{
 			JComboBox<String> cb = (JComboBox<String>)e.getSource();
 	        encoding = (String)cb.getSelectedItem();
 	        if(encoding != null)openDoc.setEncoding(encoding);
-	        else openDoc.setEncoding("Atbash");
+	        else openDoc.setEncoding("None");
 		}
 	}
 	
 	public Text2SpeechEditorView() {
-		String[] encodings = {"Atbash", "Rot13"};
+		String[] encodings = {"None", "Atbash", "Rot13"};
 		encoding = encodings[0];
 		CommandsFactory comFactory = new CommandsFactory();
 		
@@ -63,6 +64,7 @@ public class Text2SpeechEditorView implements ActionListener{
 
 		button = new JButton("Open file");
 		saveButton = new JButton("Save File");
+		encodingLabel = new JLabel("Encoding:");
 		encodingsList = new JComboBox<String>(encodings);
 
 		
@@ -96,6 +98,7 @@ public class Text2SpeechEditorView implements ActionListener{
 		textPanel.setLayout(new GridLayout(1,0));
 		panel.add(button);
 		panel.add(saveButton);
+		panel.add(encodingLabel);
 		panel.add(encodingsList);
 		textPanel.add(scroll);
 		frame.add(panel, BorderLayout.PAGE_START);

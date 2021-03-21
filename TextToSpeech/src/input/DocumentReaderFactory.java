@@ -28,6 +28,9 @@ public class DocumentReaderFactory {
 			readerRot13Decorator = new ReaderRot13Decorator(docReader);
 			return readerRot13Decorator;
 		}
+		else if(docEncoding == "None") {  // Decorator not required
+			return docReader;
+		}
 		return null;
 	}
 	

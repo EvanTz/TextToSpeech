@@ -43,7 +43,7 @@ public class Document {
 		// TODO test
 		//contents = new ArrayList<String>();
 		//contents.addAll(Arrays.asList("this","is","a","test",docPath,docType,docEncoding));
-		
+
 	}
 	
 	public ArrayList<String> getContents(){
