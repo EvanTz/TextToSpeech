@@ -2,9 +2,11 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import input.DocumentReader;
 import input.DocumentReaderFactory;
+import input.ExcelReader;
 import output.DocumentWriter;
 import output.DocumentWriterFactory;
 
@@ -15,11 +17,16 @@ public class Document {
 	private DocumentReader documentReader;
 	private DocumentReaderFactory docReaderFactory;
 	private DocumentWriter documentWriter;
-	private DocumentWriterFactory docWriterFactory; 
+	private DocumentWriterFactory docWriterFactory;
+	private boolean isOpened = false;
+	private String docPath = "";	
+	private String docType = "";	
+	private String docEncoding = "";
 	
 
 	public Document() {
 		docReaderFactory = new DocumentReaderFactory();
+		docWriterFactory = new DocumentWriterFactory();
 	}
 	
 	public void setAudioManager(TTSFacade tts) {
@@ -33,20 +40,33 @@ public class Document {
 	}
 	
 	public void open(String docPath, String docType, String docEncoding) {
-		//System.out.println(docPath);
-		//System.out.println(docType);
-		//System.out.println(docEncoding);
 		
 		documentReader = docReaderFactory.createReader(docPath, docType, docEncoding);
 		contents = (ArrayList<String>) documentReader.read();
+		isOpened  = true;
+		this.docPath = docPath;
+		this.docType = docType;
+		this.docEncoding = docEncoding;
 		
-		// TODO test
-		//contents = new ArrayList<String>();
-		//contents.addAll(Arrays.asList("this","is","a","test",docPath,docType,docEncoding));
 	}
 	
 	public ArrayList<String> getContents(){
 		return this.contents;
+	}
+	
+	public void setContents(List<String> inCon) {
+		this.contents = (ArrayList<String>) inCon;
+	}
+	
+	public boolean getOpenState() {
+		return isOpened;
+	}
+	public List<String> getPathTypeEncoding(){
+		List<String> docList = new ArrayList<>();
+		docList.add(docPath);
+		docList.add(docType);
+		docList.add(docEncoding);
+		return docList;
 	}
 	
 	public void playContents() {
@@ -57,7 +77,11 @@ public class Document {
 		
 	}
 	
-	public void save(String str1, String str2, String str3) {
+	public void save(String docPath, String docType, String docEncoding) {
+
+		docWriterFactory.setContents(contents);
+		documentWriter = docWriterFactory.createWriter(docPath, docType, docEncoding);
+		documentWriter.write();
 		
 	}
 	

@@ -18,9 +18,7 @@ public class ReaderAtbashDecorator extends ReaderDecorator{
 	public List<String> read() {
 		input = doc.read();
 		String tempString = "";
-		
-		// TODO check that input is not null
-		
+	
 		for(String line: input) {
 			tempString = "";
 			for( char c : line.toCharArray()) {

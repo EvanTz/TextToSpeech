@@ -1,17 +1,41 @@
 package output;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WriterAtbashDecorator extends WriterDecorator{
-
-	public WriterAtbashDecorator() {
-		// TODO Auto-generated constructor stub
+	private List<String> contents;
+	private List<String> output;
+	
+	public WriterAtbashDecorator(List<String> contents) {
+		this.contents = contents;
+		this.output = new ArrayList<>();
 	}
 
 	@Override
-	public List<String> write() {
-		// TODO Auto-generated method stub
-		return null;
+	public void write() {
+		// encode and decode are the same
+		String tempString = "";
+		for(String line: contents) {
+			tempString = "";
+			for( char c : line.toCharArray()) {
+				if(Character.isLowerCase(c)) {
+					tempString += (char) ('z' + ('a' - c));
+ 				}
+				else if(Character.isUpperCase(c)) {
+					tempString += (char) ('Z' + ('A' - c));
+				}
+				else {
+					tempString += c;
+				}
+			}
+			output.add(tempString);
+		
+		}
+	}
+	
+	public List<String> getOutput(){
+		return this.output;
 	}
 
 }

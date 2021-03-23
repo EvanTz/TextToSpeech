@@ -41,8 +41,14 @@ public class Text2SpeechEditorView implements ActionListener{
 		if(e.getSource() == encodingsList) {
 			JComboBox<String> cb = (JComboBox<String>)e.getSource();
 	        encoding = (String)cb.getSelectedItem();
-	        if(encoding != null)openDoc.setEncoding(encoding);
-	        else openDoc.setEncoding("None");
+	        if(encoding != null) {
+	        	openDoc.setEncoding(encoding);
+	        	saveDoc.setEncoding(encoding);
+	        }
+	        else {
+	        	openDoc.setEncoding("None");
+	        	saveDoc.setEncoding("None");
+	        }
 		}
 	}
 	
@@ -76,11 +82,19 @@ public class Text2SpeechEditorView implements ActionListener{
 		openDoc.setTableModel(model);
 		openDoc.setTable(table);
 		openDoc.setScroll(scroll);
+		openDoc.setFrame(frame);
 		openDoc.setEncoding(encoding);
 		
 		button.addActionListener(openDoc);
 		
 		saveDoc = (SaveDocument) comFactory.createCommand("SaveDocument");
+		saveDoc.setDocument(openDoc.getDocument());
+		saveDoc.setTextArea(textArea);
+		saveDoc.setTableModel(model);
+		saveDoc.setTable(table);
+		saveDoc.setEncoding(encoding);
+		saveDoc.setScroll(scroll);
+		
 		saveButton.addActionListener(saveDoc);
 		
 		encodingsList.addActionListener(this);
@@ -98,6 +112,7 @@ public class Text2SpeechEditorView implements ActionListener{
 		frame.setTitle("Text2Speech");
 		frame.setPreferredSize(new Dimension(800,400));
 		frame.pack();
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
 		
