@@ -39,6 +39,7 @@ public class Text2SpeechEditorView implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == encodingsList) {
+			@SuppressWarnings("unchecked")
 			JComboBox<String> cb = (JComboBox<String>)e.getSource();
 	        encoding = (String)cb.getSelectedItem();
 	        if(encoding != null) {

@@ -1,7 +1,5 @@
 package commands;
 
-//"D:\\Users\\Vaggelis\\Documents\\GitHub\\soft eng textToSpeech\\TextToSpeech\\Resources\\InputSamples"
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -36,9 +34,7 @@ public class OpenDocument implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		// CHANGE THE PATH TO YOUR OWN
-		JFileChooser chooseFile = new JFileChooser("D:\\Users\\Vaggelis\\Documents\\GitHub\\soft eng textToSpeech\\TextToSpeech\\Resources\\InputSamples");
-		
+		JFileChooser chooseFile = new JFileChooser(System.getProperty("user.dir")+"\\Resources\\InputSamples");
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel or Word Document", "docx", "xlsx");
 		chooseFile.setFileFilter(filter);
 		

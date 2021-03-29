@@ -1,7 +1,5 @@
 package commands;
 
-//"D:\\Users\\Vaggelis\\Documents\\GitHub\\soft eng textToSpeech\\TextToSpeech\\Resources\\InputSamples"
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -32,8 +30,7 @@ public class SaveDocument implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if(doc.getOpenState()) {
-			// CHANGE THE PATH TO YOUR OWN
-			JFileChooser chooseSavePath = new JFileChooser("D:\\Users\\Vaggelis\\Documents\\GitHub\\soft eng textToSpeech\\TextToSpeech\\Resources\\InputSamples");
+			JFileChooser chooseSavePath = new JFileChooser(System.getProperty("user.dir")+"\\Resources\\InputSamples");
 			
 			if (doc.getPathTypeEncoding().get(1) == "docx") {
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("Word Document", "docx");
@@ -76,19 +73,26 @@ public class SaveDocument implements ActionListener{
 						JOptionPane.showMessageDialog(chooseSavePath, "Save File is not of the same type as opened file.","Warning",JOptionPane.PLAIN_MESSAGE);
 					}
 					else {
-					
-						String line = "";
-						List<String> out = new ArrayList<>();
-						for (int i = 0; i < model.getRowCount(); i++) {
-							line = "";
-							for (int j = 0; j < model.getColumnCount(); j++) {
-								line = line + model.getValueAt(i, j) + ",";
+						if(!table.isEditing()) {
+							String line = "";
+							List<String> out = new ArrayList<>();
+							for (int i = 0; i < model.getRowCount(); i++) {
+								line = "";
+								for (int j = 0; j < model.getColumnCount(); j++) {
+									line = line + model.getValueAt(i, j) + ",";
+								}
+								line = line.substring(0,line.length()-1);
+								out.add(line);
 							}
-							line = line.substring(0,line.length()-1);
-							out.add(line);
+							doc.setContents(out);
+							doc.save(inputDoc, "xlsx", encoding);
 						}
-						doc.setContents(out);
-						doc.save(inputDoc, "xlsx", encoding);
+						else {
+							JOptionPane.showMessageDialog(chooseSavePath,
+									"Cannot save file while cell is being edited. Press enter or select another cell to exit edit mode!",
+									"Warning",JOptionPane.PLAIN_MESSAGE);
+						}
+						
 					}
 				}
 				else JOptionPane.showMessageDialog(chooseSavePath, "Save cancelled.","Warning",JOptionPane.PLAIN_MESSAGE);
