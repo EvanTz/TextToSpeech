@@ -16,6 +16,7 @@ public class ReaderAtbashDecorator extends ReaderDecorator{
 
 	@Override
 	public List<String> read() {
+		output.clear();
 		input = doc.read();
 		String tempString = "";
 	
