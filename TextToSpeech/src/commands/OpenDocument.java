@@ -52,9 +52,10 @@ public class OpenDocument implements ActionListener{
 			}
 			
 			if(inputDoc.endsWith("docx")) {
-				doc.open(inputDoc, "docx", encoding); 
+				openDoc(inputDoc, "docx", encoding);
+				
 				textArea.setText(null);
-				for (String s : getDocument().getContents()) {
+				for (String s : doc.getContents()) {
 					textArea.append(s);
 				}
 				
@@ -63,7 +64,7 @@ public class OpenDocument implements ActionListener{
 				frame.setTitle("Text2Speech: " + chooseFile.getSelectedFile().getName());
 			}
 			else if(inputDoc.endsWith("xlsx")) {
-				doc.open(inputDoc, "xlsx", encoding);
+				openDoc(inputDoc, "xlsx", encoding);
 		
 				table.setCellSelectionEnabled(true);
 				
@@ -79,9 +80,13 @@ public class OpenDocument implements ActionListener{
 		
 	}
 	
+	public void openDoc(String inputDoc, String fileType, String encoding) {
+		doc.open(inputDoc, fileType, encoding);
+	}
+	
 	private void setExcelTable() {
 		ArrayList<ArrayList<String>> cells = new ArrayList<>();
-		for(String i : getDocument().getContents()){
+		for(String i : doc.getContents()){
 			cells.add( new ArrayList<String>(Arrays.asList((i.split(",")))));
 		}
 		if (!cells.isEmpty()) {
