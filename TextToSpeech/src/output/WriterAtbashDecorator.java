@@ -15,6 +15,7 @@ public class WriterAtbashDecorator extends WriterDecorator{
 	@Override
 	public void write() {
 		// encode and decode are the same
+		output.clear();
 		String tempString = "";
 		for(String line: contents) {
 			tempString = "";

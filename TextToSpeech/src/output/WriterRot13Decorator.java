@@ -14,6 +14,7 @@ public class WriterRot13Decorator extends WriterDecorator {
 	
 	@Override
 	public void write() {
+		output.clear();
 		String tempString = "";
 		for(String line: contents) {
 			tempString = "";
