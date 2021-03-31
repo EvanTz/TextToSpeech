@@ -13,9 +13,7 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
-
 public class ExcelReader implements DocumentReader{
-	
 	private String docPath;
 
 	public ExcelReader(String docPath) {
@@ -24,6 +22,7 @@ public class ExcelReader implements DocumentReader{
 	}
 
 	public List<String> read(){
+		String rowString = "";
 		List<String> content = new ArrayList<String>();
 		FileInputStream excelFile;
 		try {
@@ -36,16 +35,22 @@ public class ExcelReader implements DocumentReader{
 				Row currentRow = iterator.next();
 				Iterator<Cell> cellIterator = currentRow.iterator();
 				
+				rowString = "";
 				while(cellIterator.hasNext()) {
 					Cell currentCell = cellIterator.next();
-					
+
 					if(currentCell.getCellType() == CellType.STRING) {
-						content.add(currentCell.getStringCellValue());
+						rowString += currentCell.getStringCellValue() + ",";
 					}
 					else if(currentCell.getCellType() == CellType.NUMERIC) {
-						content.add(currentCell.getStringCellValue());
+						rowString +=currentCell.getStringCellValue() + ",";
 					}
-				}	
+					else {
+						rowString +=" " + ",";
+					}
+				}
+				
+				content.add(rowString.substring(0,rowString.length()-1));
 			}	
 		workbook.close();
 		} catch (FileNotFoundException e) {
@@ -56,8 +61,8 @@ public class ExcelReader implements DocumentReader{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-			
-			
+		
 		return content;
 	}
+	
 }

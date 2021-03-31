@@ -20,13 +20,14 @@ public class ExcelWriter implements DocumentWriter  {
 	public ExcelWriter(String docPath, List<String> content) {
 		this.docPath = docPath;
 		this.content = content;
-	}
 
+	
+	}
 	@Override
 	public void write() {
 		ArrayList<ArrayList<String>> cells = new ArrayList<>();
-		//File file = new File(docPath);
-		//file.delete();
+		File file = new File(docPath);
+		file.delete();
 		XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet();
        /*

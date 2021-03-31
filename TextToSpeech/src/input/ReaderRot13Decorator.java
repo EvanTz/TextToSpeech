@@ -16,11 +16,10 @@ public class ReaderRot13Decorator extends ReaderDecorator{
 
 	@Override
 	public List<String> read() {
+		output.clear();
 		input = doc.read();
 		String tempString = "";
-		
-		// TODO check that input is not null
-		
+
 		for(String line: input) {
 			tempString = "";
 			for( char c : line.toCharArray()) {

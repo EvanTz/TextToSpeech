@@ -1,19 +1,26 @@
 package commands;
 
-//"D:\\Users\\Vaggelis\\Documents\\GitHub\\soft eng textToSpeech\\TextToSpeech\\Resources\\InputSamples"
-
 import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
+
 import java.io.FileInputStream;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.JViewport;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import model.Document;
 
@@ -24,6 +31,7 @@ public class OpenDocument implements ActionListener{
 	private JTable table = new JTable();
 	private DefaultTableModel model;
 	private JScrollPane scroll = new JScrollPane();
+	private JFrame frame;
 	
 	public OpenDocument() {
 		this.doc = new Document();
@@ -31,9 +39,12 @@ public class OpenDocument implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
+
 		// CHANGE THE PATH TO YOUR OWN
-		JFileChooser chooseFile = new JFileChooser("C:\\Users\\dimsi\\git\\TextToSpeech\\TextToSpeech\\Resources");
 		
+
+		JFileChooser chooseFile = new JFileChooser(System.getProperty("user.dir")+"\\Resources\\InputSamples");
+
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel or Word Document", "docx", "xlsx");
 		chooseFile.setFileFilter(filter);
 		
@@ -52,28 +63,27 @@ public class OpenDocument implements ActionListener{
 			}
 			
 			if(inputDoc.endsWith("docx")) {
-				doc.open(inputDoc, "docx", encoding); 
-				textArea.setText(getDocument().getContents().toString());
+				openDoc(inputDoc, "docx", encoding);
+				
+				textArea.setText(null);
+				for (String s : doc.getContents()) {
+					textArea.append(s);
+				}
+				
 				scroll.setVisible(true);
 				scroll.setViewportView(textArea);
+				frame.setTitle("Text2Speech: " + chooseFile.getSelectedFile().getName());
 			}
 			else if(inputDoc.endsWith("xlsx")) {
-				doc.open(inputDoc, "xlsx", encoding);
-				
-				
-				
-				// TODO this should be implemented in a private method ideally
+				openDoc(inputDoc, "xlsx", encoding);
+		
 				table.setCellSelectionEnabled(true);
-				model.setColumnCount(getDocument().getContents().size());
-				model.setRowCount(1);
 				
-				for (String i : getDocument().getContents()){
-					model.setValueAt(i, 0, getDocument().getContents().indexOf(i)); }
-				 
-				
+				setExcelTable();
 				
 				scroll.setVisible(true);
 				scroll.setViewportView(table);
+				frame.setTitle("Text2Speech: " + chooseFile.getSelectedFile().getName());
 			}
 			
 		}
@@ -81,18 +91,45 @@ public class OpenDocument implements ActionListener{
 		
 	}
 	
+	public void openDoc(String inputDoc, String fileType, String encoding) {
+		doc.open(inputDoc, fileType, encoding);
+	}
+	
+	private void setExcelTable() {
+		ArrayList<ArrayList<String>> cells = new ArrayList<>();
+		for(String i : doc.getContents()){
+			cells.add( new ArrayList<String>(Arrays.asList((i.split(",")))));
+		}
+		if (!cells.isEmpty()) {
+			model.setColumnCount(cells.get(0).size());
+		}
+		else {
+			model.setColumnCount(0);
+		}
+		
+		model.setRowCount(cells.size());
+		
+		for(List<String> row : cells) {
+			for (String col : row) {
+				model.setValueAt(col, cells.indexOf(row), row.indexOf(col));
+			}
+		}
+	}
+	
 	public void setTextArea(JTextArea textArea) {
 		this.textArea = textArea;
 	}
 	public void setTable(JTable table) {
 		this.table = table;
-		
 	}
 	public void setTableModel(DefaultTableModel model) {
 		this.model = model;
 	}
 	public void setScroll(JScrollPane scroll) {
 		this.scroll = scroll;
+	}
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
 	}
 	
 	public void setDocument(Document document) {
@@ -115,6 +152,5 @@ public class OpenDocument implements ActionListener{
 		
 	}
 
-	
 	
 }
