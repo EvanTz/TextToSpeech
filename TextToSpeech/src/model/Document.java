@@ -58,7 +58,7 @@ public class Document {
 		
 	}
 	
-	public void save(String str1, String str2, String str3) {
+	public void save(String docPath, String str2, String str3) {
 		
 	}
 	

@@ -13,13 +13,12 @@ public class WordReader implements DocumentReader{
 	private String docPath;
 	
 	public WordReader(String docPath) {
-		// TODO Auto-generated constructor stub
 		this.docPath = docPath;
 		
 	}
 	
 	public List<String> read(){
-		
+	
 		List<String> content = new ArrayList<String>();
 		
 		FileInputStream fps;
