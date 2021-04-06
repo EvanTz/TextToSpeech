@@ -24,7 +24,7 @@ public class SaveDocument implements ActionListener{
 	private JScrollPane scroll;
 	
 	public SaveDocument() {
-		// Auto-generated constructor stub
+	
 	}
 
 	@Override

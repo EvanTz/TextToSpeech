@@ -40,8 +40,6 @@ public class OpenDocument implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent event) {
 
-		// CHANGE THE PATH TO YOUR OWN
-		
 
 		JFileChooser chooseFile = new JFileChooser(System.getProperty("user.dir")+"\\Resources\\InputSamples");
 
