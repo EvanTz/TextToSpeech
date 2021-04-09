@@ -22,21 +22,25 @@ public class Document {
 	private String docPath = "";	
 	private String docType = "";	
 	private String docEncoding = "";
+	private int pitch;
+	private int rate;
+	private double volume;
 	
 
 	public Document() {
 		docReaderFactory = new DocumentReaderFactory();
 		docWriterFactory = new DocumentWriterFactory();
+		audioManager = new TTSFacade();
 	}
 	
 	public void setAudioManager(TTSFacade tts) {
-		
+		this.audioManager = tts;
 	}
 	public void setDocReaderFactory(DocumentReaderFactory drf) {
 		this.docReaderFactory = drf;
 	}
 	public void setDocWriterFactory(DocumentWriterFactory dwf) {
-		
+		this.docWriterFactory = dwf;
 	}
 	
 	public void open(String docPath, String docType, String docEncoding) {
@@ -61,6 +65,7 @@ public class Document {
 	public boolean getOpenState() {
 		return isOpened;
 	}
+	
 	public List<String> getPathTypeEncoding(){
 		List<String> docList = new ArrayList<>();
 		docList.add(docPath);
@@ -70,11 +75,22 @@ public class Document {
 	}
 	
 	public void playContents() {
-		
+		// TODO TTS
 	}
 	
+	public void stopPlayingContents() {
+		// TODO TTS
+	}
+
 	public void playLine(int line) {
-		
+		// TODO we have different approach, this is probably not needed
+	}
+
+	public void setVolRatePitchDoc(double speechVolume, int speechRate, int speechPitch) {
+		this.volume = speechVolume;
+		this.rate = speechRate;
+		this.pitch = speechPitch;
+		// TODO TTS pass these values to TTS
 	}
 	
 	public void save(String docPath, String docType, String docEncoding) {

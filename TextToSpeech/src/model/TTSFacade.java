@@ -15,7 +15,7 @@ public class TTSFacade {
 		
 	}
 	
-	public void setVolume(int volume) {
+	public void setVolume(double volume) {
 		
 	}
 	
@@ -24,6 +24,10 @@ public class TTSFacade {
 	}
 	
 	public void setRate(int rate) {
+		
+	}
+	
+	public void stopPlay() {
 		
 	}
 	
