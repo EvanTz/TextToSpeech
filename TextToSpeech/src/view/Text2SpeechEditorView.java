@@ -111,16 +111,21 @@ public class Text2SpeechEditorView implements ActionListener{
 		JPanel textPanel = new JPanel();	
 		
 		openButton = new JButton("Open file");
+		openButton.setFocusable(false);
 		openButton.setBackground(new Color(162, 235, 245));
 		saveButton = new JButton("Save File");
+		saveButton.setFocusable(false);
 		saveButton.setBackground(new Color(162, 235, 245));
 		encodingLabel = new JLabel("Encoding:");
 		encodingsList = new JComboBox<String>(encodings);
+		encodingsList.setFocusable(false);
 		encodingsList.setBackground(Color.ORANGE);
 		playContentsButton = new JButton("Play Audio");
+		playContentsButton.setFocusable(false);
 		playContentsButton.setPreferredSize(new Dimension(100,26));
 		playContentsButton.setBackground(new Color(102, 219, 81));
 		settingsButton = new JButton("TTS settings");
+		settingsButton.setFocusable(false);
 		settingsButton.setBackground(Color.GRAY.brighter());
 		
 		textArea = new JTextArea();
