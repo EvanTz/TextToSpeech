@@ -15,8 +15,12 @@ public class CommandsFactory {
 		else if (str == "SaveDocument") {
 			return new SaveDocument();
 		}
-		else {
+		else if (str == "DocumentToSpeech"){
 			return new DocumentToSpeech();
+		}
+		else {
+			// extra commands
+			return null;
 		}
 		
 	}
