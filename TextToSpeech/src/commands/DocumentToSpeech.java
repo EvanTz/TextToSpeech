@@ -62,7 +62,7 @@ public class DocumentToSpeech implements ActionListener{
 		}
 	}
 	
-	public void playAllContents() { // method is public solely for testing
+	public void playAllContents() { // method is public just for testing
 		if(doc.getOpenState()) {
 			if(doc.getPathTypeEncoding().get(1) == "docx") {
 				List<String> play = new ArrayList<>();
@@ -71,6 +71,8 @@ public class DocumentToSpeech implements ActionListener{
 					// TODO here save the play value to a list in replay manager
 				}
 				doc.setContents(play);
+				
+				
 				doc.setVolRatePitchDoc(volume, rate, pitch);
 				doc.playContents();
 			}
@@ -106,7 +108,7 @@ public class DocumentToSpeech implements ActionListener{
 		
 	}
 
-	public void playSelectedContents() { // method is public solely for testing
+	public void playSelectedContents() { // method is public just for testing
 		if(doc.getOpenState()) {
 			if(doc.getPathTypeEncoding().get(1) == "docx") {
 				List<String> play = new ArrayList<>();
@@ -115,9 +117,10 @@ public class DocumentToSpeech implements ActionListener{
 					// TODO here save the play value to a list in replay manager
 				}
 				
-				doc.setContents(play);
+				doc.setPartContents(play);
 				doc.setVolRatePitchDoc(volume, rate, pitch);
 				doc.playContents();
+				doc.setPartContents(null);
 			}
 			else if (doc.getPathTypeEncoding().get(1) == "xlsx") {
 				if(!table.isEditing()) {
@@ -133,9 +136,10 @@ public class DocumentToSpeech implements ActionListener{
 					if(rm.isActiveRecording()) {
 						// TODO here save the out value(s) to a list in replay manager
 					}
-					doc.setContents(out);
+					doc.setPartContents(out);
 					doc.setVolRatePitchDoc(volume, rate, pitch);
 					doc.playContents();
+					doc.setPartContents(null);
 				}
 				else {
 					JOptionPane.showMessageDialog(null,
