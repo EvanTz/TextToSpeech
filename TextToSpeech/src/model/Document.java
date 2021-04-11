@@ -25,14 +25,12 @@ public class Document {
 	private int pitch;
 	private int rate;
 	private double volume;
-	private List<String> partCon;
 	
 
 	public Document() {
 		docReaderFactory = new DocumentReaderFactory();
 		docWriterFactory = new DocumentWriterFactory();
 		audioManager = new TTSFacade();
-		partCon = new ArrayList<>();
 	}
 	
 	public void setAudioManager(TTSFacade tts) {
@@ -77,17 +75,11 @@ public class Document {
 	}
 	
 	public void playContents() {
-		// TODO TTS
-		if(partCon != null) {
-			// tts with partCon
-		}
-		else {
-			// tts with contents
-		}
+		// TODO TTS for all contents
 	}
 	
-	public void setPartContents(List<String> partCon) {
-		this.partCon = partCon;
+	public void playPartContents(List<String> partCon) {
+		// TODO TTS for selected part of contents
 	}
 	
 	public void stopPlayingContents() {
