@@ -52,7 +52,7 @@ public class Document {
 		this.docPath = docPath;
 		this.docType = docType;
 		this.docEncoding = docEncoding;
-		
+
 	}
 	
 	public ArrayList<String> getContents(){
@@ -66,6 +66,9 @@ public class Document {
 	public boolean getOpenState() {
 		return isOpened;
 	}
+	public void setOpenState(boolean state) {
+		this.isOpened = state;
+	}
 	
 	public List<String> getPathTypeEncoding(){
 		List<String> docList = new ArrayList<>();
@@ -76,29 +79,37 @@ public class Document {
 	}
 	
 	public void playContents() {
-		// TODO TTS for all contents,  contents list need to be joined into a single string
+		audioManager.play(String.join(" ", contents));
 	}
 	
 	public void playPartContents(List<String> partCon) {
-		// TODO TTS for selected part of contents,  contents list need to be joined into a single string
+		audioManager.play(String.join(" ", partCon));
 	}
 	
 	public void stopPlayingContents() {
-		// TODO TTS
+		audioManager.stopPlay();
 	}
 	
 	public void setVolRatePitchDoc(double speechVolume, int speechRate, int speechPitch) {
 		this.volume = (float)speechVolume;
 		this.rate = (float)speechRate;
 		this.pitch = (float)speechPitch;
-		// TODO TTS pass these values to TTS
+		
+		audioManager.setPitch(pitch);
+		audioManager.setVolume(volume);
+		audioManager.setRate(rate);
+		
 	}
 	
+
+	
+
 	public void save(String docPath, String docType, String docEncoding) {
 
 		docWriterFactory.setContents(contents);
 		documentWriter = docWriterFactory.createWriter(docPath, docType, docEncoding);
 		documentWriter.write();
+
 		
 	}
 	

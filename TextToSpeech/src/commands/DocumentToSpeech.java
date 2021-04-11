@@ -107,10 +107,6 @@ public class DocumentToSpeech implements ActionListener{
 				}
 			}
 		}
-		else {
-			JOptionPane.showMessageDialog(null, "No file opened to be played to audio.","Warning",JOptionPane.PLAIN_MESSAGE);
-		}
-		
 	}
 
 	public void playSelectedContents() { // method is public just for testing
@@ -151,9 +147,6 @@ public class DocumentToSpeech implements ActionListener{
 							"Warning",JOptionPane.PLAIN_MESSAGE);
 				}
 			}
-		}
-		else {
-			JOptionPane.showMessageDialog(null, "No file opened to be played to audio.","Warning",JOptionPane.PLAIN_MESSAGE);
 		}
 	}
 	

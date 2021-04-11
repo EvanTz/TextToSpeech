@@ -1,10 +1,15 @@
 package commands;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
+
+import java.io.FileInputStream;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -34,7 +39,10 @@ public class OpenDocument implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
+
+
 		JFileChooser chooseFile = new JFileChooser(System.getProperty("user.dir")+"\\Resources\\InputSamples");
+
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel or Word Document", "docx", "xlsx");
 		chooseFile.setFileFilter(filter);
 		
@@ -46,6 +54,7 @@ public class OpenDocument implements ActionListener{
 			String inputDoc = chooseFile.getSelectedFile().getAbsolutePath();
 			
 			//System.out.println("Document selected: " + inputDoc);
+			
 			
 			if(!inputDoc.endsWith("docx") && !inputDoc.endsWith("xlsx")) {
 				JOptionPane.showMessageDialog(chooseFile, "Wrong type of document selected.","Warning",JOptionPane.PLAIN_MESSAGE);

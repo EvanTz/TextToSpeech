@@ -111,14 +111,26 @@ public class Text2SpeechEditorView implements ActionListener{
 		JPanel panel = new JPanel();
 		JPanel textPanel = new JPanel();	
 
+		
+
+
+		JButton button = new JButton("Open file");
+
+		button.setBounds(2,2,2,2);  
+
+		JButton saveButton = new JButton("Save File");
+
+		button = new JButton("Open file");
 		openButton = new JButton("Open file");
 		openButton.setFocusable(false);
 		openButton.setBackground(new Color(162, 235, 245));
+
 		saveButton = new JButton("Save File");
 		saveButton.setFocusable(false);
 		saveButton.setBackground(new Color(162, 235, 245));
 		encodingLabel = new JLabel("Encoding:");
 		encodingsList = new JComboBox<String>(encodings);
+
 		encodingsList.setFocusable(false);
 		encodingsList.setBackground(Color.ORANGE);
 		playContentsButton = new JButton("Play Audio");
@@ -128,6 +140,7 @@ public class Text2SpeechEditorView implements ActionListener{
 		settingsButton = new JButton("TTS settings");
 		settingsButton.setFocusable(false);
 		settingsButton.setBackground(Color.GRAY.brighter());
+
 		
 		textArea = new JTextArea();
 		textArea.setLineWrap(true);
@@ -171,7 +184,11 @@ public class Text2SpeechEditorView implements ActionListener{
 		playContentsButton.addActionListener(docToSp);
 		
 		encodingsList.addActionListener(this);
+
+
+
 		settingsButton.addActionListener(this);
+
 		
 		textPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		textPanel.setLayout(new GridLayout(1,0));

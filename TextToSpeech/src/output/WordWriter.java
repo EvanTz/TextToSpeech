@@ -20,12 +20,12 @@ public class WordWriter implements DocumentWriter {
 		// TODO Auto-generated constructor stub
 		this.docPath = docPath;
 		this.content = content;
-	}
 
+	}
 	@Override
 	public void write() {
-		File file = new File(docPath);
-		file.delete();
+		//File file = new File(docPath);
+		//file.delete();
 		try(XWPFDocument doc = new XWPFDocument()) {
 			XWPFParagraph p = doc.createParagraph();
 			p.setAlignment(ParagraphAlignment.LEFT);  // changed from CENTER to LEFT

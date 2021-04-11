@@ -37,7 +37,7 @@ public class FakeTTSFacade extends TTSFacade {
 	}
 	
 	public float getVolume() {
-		return volume;
+		return (float) (Math.round(volume * 100.0)/100.0);
 	}
 	
 	public float getPitch() {
