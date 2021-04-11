@@ -117,10 +117,9 @@ public class DocumentToSpeech implements ActionListener{
 					// TODO here save the play value to a list in replay manager
 				}
 				
-				doc.setPartContents(play);
 				doc.setVolRatePitchDoc(volume, rate, pitch);
-				doc.playContents();
-				doc.setPartContents(null);
+				doc.playPartContents(play);
+				
 			}
 			else if (doc.getPathTypeEncoding().get(1) == "xlsx") {
 				if(!table.isEditing()) {
@@ -136,10 +135,10 @@ public class DocumentToSpeech implements ActionListener{
 					if(rm.isActiveRecording()) {
 						// TODO here save the out value(s) to a list in replay manager
 					}
-					doc.setPartContents(out);
+
 					doc.setVolRatePitchDoc(volume, rate, pitch);
-					doc.playContents();
-					doc.setPartContents(null);
+					doc.playPartContents(out);
+
 				}
 				else {
 					JOptionPane.showMessageDialog(null,
