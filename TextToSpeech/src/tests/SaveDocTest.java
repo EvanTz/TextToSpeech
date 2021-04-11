@@ -104,7 +104,7 @@ class SaveDocTest {
 		
 	}
 	@Test 
-	public final void testWriterAtBashDeocoderForExcel() {
+	public final void testWriterAtBashDecocoderForExcel() {
 		String sampleInput = (System.getProperty("user.dir")+"\\Resources\\InputSamples\\ExcelSampleAtbash.xlsx");
 		writerAtBashDecorator = new WriterAtbashDecorator(excelWriterInput);
 		writerAtBashDecorator.write();
@@ -175,7 +175,7 @@ class SaveDocTest {
 		saveDocument = new SaveDocument();
 		doc = new Document();
 		saveDocument.setDocument(doc);
-		doc.setContents(wordWriterInput);
+		doc.setContents(excelWriterInput);
 		
 		openDocument = new OpenDocument();
 		doc1 = new Document();
@@ -185,19 +185,19 @@ class SaveDocTest {
 		sampleInput = (System.getProperty("user.dir")+"\\Resources\\InputSamples\\ExcelSample.xlsx");
 		doc.save(sampleInput, "xlsx", "None");
 		openDocument.openDoc(sampleInput, "xlsx", "None");
-		assertEquals(wordWriterInput, doc1.getContents());
+		assertEquals(excelWriterInput, doc1.getContents());
 		
 		//test saving of atbach encoded document
 		sampleInput = (System.getProperty("user.dir")+"\\Resources\\InputSamples\\ExcelSampleAtbash.xlsx");
 		doc.save(sampleInput, "xlsx", "Atbash");
 		openDocument.openDoc(sampleInput, "xlsx", "Atbash");
-		assertEquals(wordWriterInput, doc1.getContents());
+		assertEquals(excelWriterInput, doc1.getContents());
 		
 		//test saving of rot13 encoded document
 		sampleInput = (System.getProperty("user.dir")+"\\Resources\\InputSamples\\ExcelSampleSaveRot13.xlsx");
 		doc.save(sampleInput, "xlsx", "Rot13");
 		openDocument.openDoc(sampleInput, "xlsx", "Rot13");
-		assertEquals(wordWriterInput, doc1.getContents());
+		assertEquals(excelWriterInput, doc1.getContents());
 		
 		
 	}

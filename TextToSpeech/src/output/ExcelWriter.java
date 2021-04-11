@@ -26,8 +26,8 @@ public class ExcelWriter implements DocumentWriter  {
 	@Override
 	public void write() {
 		ArrayList<ArrayList<String>> cells = new ArrayList<>();
-		File file = new File(docPath);
-		file.delete();
+		//File file = new File(docPath);
+		//file.delete();
 		XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet();
        /*
