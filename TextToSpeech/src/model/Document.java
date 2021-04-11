@@ -22,9 +22,9 @@ public class Document {
 	private String docPath = "";	
 	private String docType = "";	
 	private String docEncoding = "";
-	private int pitch;
-	private int rate;
-	private double volume;
+	private float pitch;
+	private float rate;
+	private float volume;
 	
 
 	public Document() {
@@ -36,6 +36,7 @@ public class Document {
 	public void setAudioManager(TTSFacade tts) {
 		this.audioManager = tts;
 	}
+	
 	public void setDocReaderFactory(DocumentReaderFactory drf) {
 		this.docReaderFactory = drf;
 	}
@@ -75,11 +76,11 @@ public class Document {
 	}
 	
 	public void playContents() {
-		// TODO TTS for all contents
+		// TODO TTS for all contents,  contents list need to be joined into a single string
 	}
 	
 	public void playPartContents(List<String> partCon) {
-		// TODO TTS for selected part of contents
+		// TODO TTS for selected part of contents,  contents list need to be joined into a single string
 	}
 	
 	public void stopPlayingContents() {
@@ -91,9 +92,9 @@ public class Document {
 	}
 
 	public void setVolRatePitchDoc(double speechVolume, int speechRate, int speechPitch) {
-		this.volume = speechVolume;
-		this.rate = speechRate;
-		this.pitch = speechPitch;
+		this.volume = (float)speechVolume;
+		this.rate = (float)speechRate;
+		this.pitch = (float)speechPitch;
 		// TODO TTS pass these values to TTS
 	}
 	
