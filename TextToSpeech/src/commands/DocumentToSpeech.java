@@ -140,7 +140,7 @@ public class DocumentToSpeech implements ActionListener{
 					if(rm.isActiveRecording()) {
 						// TODO here save the out value(s) to a list in replay manager
 					}
-
+					
 					doc.setVolRatePitchDoc(volume, rate, pitch);
 					doc.playPartContents(out);
 

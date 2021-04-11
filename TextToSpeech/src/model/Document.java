@@ -86,11 +86,7 @@ public class Document {
 	public void stopPlayingContents() {
 		// TODO TTS
 	}
-
-	public void playLine(int line) {
-		// TODO we have different approach, this is probably not needed
-	}
-
+	
 	public void setVolRatePitchDoc(double speechVolume, int speechRate, int speechPitch) {
 		this.volume = (float)speechVolume;
 		this.rate = (float)speechRate;

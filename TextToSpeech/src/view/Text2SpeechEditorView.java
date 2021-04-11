@@ -67,6 +67,7 @@ public class Text2SpeechEditorView implements ActionListener{
 			
 			JLabel rt = new JLabel("Rate (words per minute):");
 			JSlider rate = new JSlider(20,250,speechRate);
+			
 			JLabel pth = new JLabel("Pitch (Hz):");
 			JSlider pitch = new JSlider(50,2000,speechPitch);
 			
