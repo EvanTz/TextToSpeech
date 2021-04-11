@@ -40,19 +40,24 @@ public class DocumentToSpeech implements ActionListener{
 			if(doc.getPathTypeEncoding().get(1) == "docx" && textArea.getSelectedText()==null) {
 				playAllContents();
 			}
-			else if (doc.getPathTypeEncoding().get(1) == "xlsx" && table.getSelectedRows()==null) {  // not needed  && table.getSelectedColumns()==null
+			else if (doc.getPathTypeEncoding().get(1) == "xlsx" && table.getSelectedRows()==null) {
 				playAllContents();
 			}
 			// else play selected text/cells
 			else if(doc.getPathTypeEncoding().get(1) == "docx" && textArea.getSelectedText()!=null) {
 				playSelectedContents();
 			}
-			else if (doc.getPathTypeEncoding().get(1) == "xlsx" && table.getSelectedRows()!=null) { // not needed  && table.getSelectedColumns()!=null
+			else if (doc.getPathTypeEncoding().get(1) == "xlsx" && table.getSelectedRows()!=null) {
 				playSelectedContents();
 			}
 			
-			playButton.setText("Stop Audio");
-			playButton.setBackground(new Color(232, 102, 93));
+			if (!doc.getOpenState()) {
+				JOptionPane.showMessageDialog(null, "No file opened to be played to audio.","Warning",JOptionPane.PLAIN_MESSAGE);
+			}
+			else {
+				playButton.setText("Stop Audio");
+				playButton.setBackground(new Color(232, 102, 93));
+			}
 			
 		}
 		else if(event.getSource() == playButton && playButton.getText()=="Stop Audio") {
