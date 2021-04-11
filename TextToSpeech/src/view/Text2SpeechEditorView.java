@@ -110,7 +110,7 @@ public class Text2SpeechEditorView implements ActionListener{
 		JFrame frame = new JFrame();
 		JPanel panel = new JPanel();
 		JPanel textPanel = new JPanel();	
-		
+
 		openButton = new JButton("Open file");
 		openButton.setFocusable(false);
 		openButton.setBackground(new Color(162, 235, 245));
