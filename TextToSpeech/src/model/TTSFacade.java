@@ -15,15 +15,19 @@ public class TTSFacade {
 		
 	}
 	
-	public void setVolume(int volume) {
+	public void setVolume(float volume) {
 		
 	}
 	
-	public void setPitch(int pitch) {
+	public void setPitch(float pitch) {
 		
 	}
 	
-	public void setRate(int rate) {
+	public void setRate(float rate) {
+		
+	}
+	
+	public void stopPlay() {
 		
 	}
 	

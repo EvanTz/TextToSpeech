@@ -22,21 +22,26 @@ public class Document {
 	private String docPath = "";	
 	private String docType = "";	
 	private String docEncoding = "";
+	private float pitch;
+	private float rate;
+	private float volume;
 	
 
 	public Document() {
 		docReaderFactory = new DocumentReaderFactory();
 		docWriterFactory = new DocumentWriterFactory();
+		audioManager = new TTSFacade();
 	}
 	
 	public void setAudioManager(TTSFacade tts) {
-		
+		this.audioManager = tts;
 	}
+	
 	public void setDocReaderFactory(DocumentReaderFactory drf) {
 		this.docReaderFactory = drf;
 	}
 	public void setDocWriterFactory(DocumentWriterFactory dwf) {
-		
+		this.docWriterFactory = dwf;
 	}
 	
 	public void open(String docPath, String docType, String docEncoding) {
@@ -67,6 +72,7 @@ public class Document {
 	public boolean getOpenState() {
 		return isOpened;
 	}
+	
 	public List<String> getPathTypeEncoding(){
 		List<String> docList = new ArrayList<>();
 		docList.add(docPath);
@@ -76,10 +82,25 @@ public class Document {
 	}
 	
 	public void playContents() {
-		
+		audioManager.play(String.join(" ", contents));
 	}
 	
-	public void playLine(int line) {
+	public void playPartContents(List<String> partCon) {
+		audioManager.play(String.join(" ", partCon));
+	}
+	
+	public void stopPlayingContents() {
+		audioManager.stopPlay();
+	}
+	
+	public void setVolRatePitchDoc(double speechVolume, int speechRate, int speechPitch) {
+		this.volume = (float)speechVolume;
+		this.rate = (float)speechRate;
+		this.pitch = (float)speechPitch;
+		
+		audioManager.setPitch(pitch);
+		audioManager.setVolume(volume);
+		audioManager.setRate(rate);
 		
 	}
 	
