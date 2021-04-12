@@ -39,6 +39,7 @@ public class Text2SpeechEditorView implements ActionListener{
 	private JLabel encodingLabel;
 	private JButton settingsButton;
 	private JButton playContentsButton;
+	private JButton stopPlayingButton;
 	private double speechVolume= 0.9;
 	private int speechRate = 150;
 	private int speechPitch = 150;
@@ -90,7 +91,7 @@ public class Text2SpeechEditorView implements ActionListener{
 			settingsPanel.add(pth);
 			settingsPanel.add(pitch);
 			
-			int result = JOptionPane.showConfirmDialog(null , settingsPanel, "test", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+			int result = JOptionPane.showConfirmDialog(null , settingsPanel, "Settings", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 			 if (result == JOptionPane.OK_OPTION) {
 	            speechVolume = (double)volume.getValue()/100;
 	            speechRate = rate.getValue();
@@ -111,16 +112,6 @@ public class Text2SpeechEditorView implements ActionListener{
 		JPanel panel = new JPanel();
 		JPanel textPanel = new JPanel();	
 
-		
-
-
-		JButton button = new JButton("Open file");
-
-		button.setBounds(2,2,2,2);  
-
-		JButton saveButton = new JButton("Save File");
-
-		button = new JButton("Open file");
 		openButton = new JButton("Open file");
 		openButton.setFocusable(false);
 		openButton.setBackground(new Color(162, 235, 245));
@@ -133,10 +124,17 @@ public class Text2SpeechEditorView implements ActionListener{
 
 		encodingsList.setFocusable(false);
 		encodingsList.setBackground(Color.ORANGE);
+		
 		playContentsButton = new JButton("Play Audio");
 		playContentsButton.setFocusable(false);
 		playContentsButton.setPreferredSize(new Dimension(100,26));
 		playContentsButton.setBackground(new Color(102, 219, 81));
+		
+		stopPlayingButton = new JButton("Stop Audio");
+		stopPlayingButton.setFocusable(false);
+		stopPlayingButton.setPreferredSize(new Dimension(100,26));
+		stopPlayingButton.setBackground(new Color(232, 102, 93));
+		
 		settingsButton = new JButton("TTS settings");
 		settingsButton.setFocusable(false);
 		settingsButton.setBackground(Color.GRAY.brighter());
@@ -176,12 +174,14 @@ public class Text2SpeechEditorView implements ActionListener{
 		docToSp = (DocumentToSpeech) comFactory.createCommand("DocumentToSpeech");
 		docToSp.setDocument(openDoc.getDocument());
 		docToSp.setPlayButton(playContentsButton);
+		docToSp.setStopButton(stopPlayingButton);
 		docToSp.setTextArea(textArea);
 		docToSp.setTableModel(model);
 		docToSp.setTable(table);
 		docToSp.setVolRatePitch(speechVolume,speechRate,speechPitch);
 		
 		playContentsButton.addActionListener(docToSp);
+		stopPlayingButton.addActionListener(docToSp);
 		
 		encodingsList.addActionListener(this);
 
@@ -198,6 +198,7 @@ public class Text2SpeechEditorView implements ActionListener{
 		panel.add(encodingsList);
 		panel.add(settingsButton);
 		panel.add(playContentsButton);
+		panel.add(stopPlayingButton);
 		textPanel.add(scroll);
 		frame.add(panel, BorderLayout.PAGE_START);
 		frame.add(textPanel, BorderLayout.CENTER);

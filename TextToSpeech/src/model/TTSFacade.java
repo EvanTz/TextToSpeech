@@ -10,6 +10,7 @@ public class TTSFacade {
 	private float rate;
 	private float volume;
 	private Thread speakerThread;
+	private boolean finished;
 	public TTSFacade() {
 		// TODO Auto-generated constructor stub
 		
@@ -23,18 +24,19 @@ public class TTSFacade {
 		voice.setVolume(volume);
 		voice.setPitch(pitch);
 		voice.setRate(rate);
+		finished = false;
 		voice.allocate();
 		voice.setOutputQueue(null);
 		Runnable speaker = new Runnable(){
 			public void run() {
 				voice.speak(message);  
 				voice.deallocate();
+				stopPlay();
 			}
-			
-        };
+        };   
        speakerThread =  new Thread(speaker);
        speakerThread.start();
-       
+
 	}
 	
 	public void setVolume(float volume) {
@@ -54,6 +56,7 @@ public class TTSFacade {
 	}
 	
 	public void stopPlay() {
+		finished = true;
 		speakerThread.interrupt();
 		voice.deallocate();
 		

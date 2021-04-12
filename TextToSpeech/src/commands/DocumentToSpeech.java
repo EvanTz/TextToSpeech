@@ -18,6 +18,7 @@ public class DocumentToSpeech implements ActionListener{
 
 	private Document doc;
 	private JButton playButton;
+	private JButton stopButton;
 	private JTextArea textArea;
 	private DefaultTableModel model;
 	private JTable table;
@@ -36,9 +37,12 @@ public class DocumentToSpeech implements ActionListener{
 		// play and stop audio (change parameters in document), DONE
 		// all contents or selected contents, DONE 
 		// TODO if replay record is true record the move(add it to a list like rm.addplayContents(List<string> content).
-		if(event.getSource() == playButton && playButton.getText()=="Play Audio") {
+		if(event.getSource() == playButton){
+			if (!doc.getOpenState()) {
+				JOptionPane.showMessageDialog(null, "No file opened to be played to audio.","Warning",JOptionPane.PLAIN_MESSAGE);
+			}
 			// if user has not selected a part of the text/any cells
-			if(doc.getPathTypeEncoding().get(1) == "docx" && textArea.getSelectedText()==null) {
+			else if(doc.getPathTypeEncoding().get(1) == "docx" && textArea.getSelectedText()==null) {
 				playAllContents();
 			}
 			else if (doc.getPathTypeEncoding().get(1) == "xlsx" && table.getSelectedRows().length== 0) {
@@ -51,25 +55,18 @@ public class DocumentToSpeech implements ActionListener{
 			else if (doc.getPathTypeEncoding().get(1) == "xlsx" && table.getSelectedRows().length != 0) {
 				playSelectedContents();
 			}
-			
-			if (!doc.getOpenState()) {
-				JOptionPane.showMessageDialog(null, "No file opened to be played to audio.","Warning",JOptionPane.PLAIN_MESSAGE);
-			}
-			else{
-				playButton.setText("Stop Audio");
-				playButton.setBackground(new Color(232, 102, 93));
-			}
+			playButton.setEnabled(!played);
 			
 		}
-		else if(event.getSource() == playButton && playButton.getText()=="Stop Audio") {
+		else if(event.getSource() == stopButton && played) { 
 			doc.stopPlayingContents();
-			playButton.setText("Play Audio");
-			playButton.setBackground(new Color(102, 219, 81));
+			played = false;
+			playButton.setEnabled(!played);
 		}
 	}
 	
 	public void playAllContents() { // method is public just for testing
-		if(doc.getOpenState()) {
+		if(doc.getOpenState() && !played) {
 			if(doc.getPathTypeEncoding().get(1) == "docx") {
 				List<String> play = new ArrayList<>();
 				play.add(textArea.getText());
@@ -81,6 +78,7 @@ public class DocumentToSpeech implements ActionListener{
 				
 				doc.setVolRatePitchDoc(volume, rate, pitch);
 				doc.playContents();
+				played = true;
 			}
 			else if (doc.getPathTypeEncoding().get(1) == "xlsx") {
 				if(!table.isEditing()) {
@@ -100,6 +98,7 @@ public class DocumentToSpeech implements ActionListener{
 					doc.setContents(out);
 					doc.setVolRatePitchDoc(volume, rate, pitch);
 					doc.playContents();
+					played = true;
 				}
 				else {
 					JOptionPane.showMessageDialog(null,
@@ -111,7 +110,7 @@ public class DocumentToSpeech implements ActionListener{
 	}
 
 	public void playSelectedContents() { // method is public just for testing
-		if(doc.getOpenState()) {
+		if(doc.getOpenState() && !played) {
 			if(doc.getPathTypeEncoding().get(1) == "docx") {
 				List<String> play = new ArrayList<>();
 				play.add(textArea.getSelectedText());
@@ -121,6 +120,7 @@ public class DocumentToSpeech implements ActionListener{
 				
 				doc.setVolRatePitchDoc(volume, rate, pitch);
 				doc.playPartContents(play);
+				played = true;
 				
 			}
 			else if (doc.getPathTypeEncoding().get(1) == "xlsx") {
@@ -140,6 +140,7 @@ public class DocumentToSpeech implements ActionListener{
 					
 					doc.setVolRatePitchDoc(volume, rate, pitch);
 					doc.playPartContents(out);
+					played = true;
 
 				}
 				else {
@@ -157,6 +158,10 @@ public class DocumentToSpeech implements ActionListener{
 	
 	public void setPlayButton(JButton playButton) {
 		this.playButton = playButton;
+	}
+	
+	public void setStopButton(JButton stopButton) {
+		this.stopButton = stopButton;
 	}
 	
 	public void ReplayManager(ReplayManager rm) {
