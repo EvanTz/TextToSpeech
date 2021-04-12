@@ -86,6 +86,8 @@ public class Document {
 	}
 	
 	public void playPartContents(List<String> partCon) {
+		
+		System.out.println("pitch:"+pitch+" volume:"+volume+" rate: "+rate);
 		audioManager.play(String.join(" ", partCon));
 	}
 	

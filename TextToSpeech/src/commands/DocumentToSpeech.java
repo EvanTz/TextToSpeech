@@ -39,16 +39,24 @@ public class DocumentToSpeech implements ActionListener{
 			// if user has not selected a part of the text/any cells
 			if(doc.getPathTypeEncoding().get(1) == "docx" && textArea.getSelectedText()==null) {
 				playAllContents();
+				playButton.setText("Play Audio");
+				playButton.setBackground(new Color(102, 219, 81));
 			}
 			else if (doc.getPathTypeEncoding().get(1) == "xlsx" && table.getSelectedRows()==null) {
 				playAllContents();
+				playButton.setText("Play Audio");
+				playButton.setBackground(new Color(102, 219, 81));
 			}
 			// else play selected text/cells
 			else if(doc.getPathTypeEncoding().get(1) == "docx" && textArea.getSelectedText()!=null) {
 				playSelectedContents();
+				playButton.setText("Play Audio");
+				playButton.setBackground(new Color(102, 219, 81));
 			}
 			else if (doc.getPathTypeEncoding().get(1) == "xlsx" && table.getSelectedRows()!=null) {
 				playSelectedContents();
+				playButton.setText("Play Audio");
+				playButton.setBackground(new Color(102, 219, 81));
 			}
 			
 			if (!doc.getOpenState()) {
@@ -163,7 +171,7 @@ public class DocumentToSpeech implements ActionListener{
 	
 	public void setPlayButton(JButton playButton) {
 		this.playButton = playButton;
-	}
+	}	
 	
 	public void ReplayManager(ReplayManager rm) {
 		this.rm = rm;

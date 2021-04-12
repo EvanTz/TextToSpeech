@@ -40,8 +40,8 @@ public class Text2SpeechEditorView implements ActionListener{
 	private JButton settingsButton;
 	private JButton playContentsButton;
 	private double speechVolume= 0.5;
-	private int speechRate = 140;
-	private int speechPitch = 500;
+	private int speechRate = 150;
+	private int speechPitch = 150;
 	private DocumentToSpeech docToSp;
 	
 	@Override
@@ -69,7 +69,7 @@ public class Text2SpeechEditorView implements ActionListener{
 			JSlider rate = new JSlider(20,250,speechRate);
 			
 			JLabel pth = new JLabel("Pitch (Hz):");
-			JSlider pitch = new JSlider(50,2000,speechPitch);
+			JSlider pitch = new JSlider(50,300,speechPitch);
 			
 			volume.setMajorTickSpacing(20);
 			volume.setPaintTicks(true);
@@ -79,7 +79,7 @@ public class Text2SpeechEditorView implements ActionListener{
 			rate.setPaintTicks(true);
 			rate.setPaintLabels(true);
 			
-			pitch.setMajorTickSpacing(1950/2);
+			pitch.setMajorTickSpacing(250/2);
 			pitch.setPaintTicks(true);
 			pitch.setPaintLabels(true);
 			
@@ -132,10 +132,13 @@ public class Text2SpeechEditorView implements ActionListener{
 
 		encodingsList.setFocusable(false);
 		encodingsList.setBackground(Color.ORANGE);
+		
 		playContentsButton = new JButton("Play Audio");
 		playContentsButton.setFocusable(false);
 		playContentsButton.setPreferredSize(new Dimension(100,26));
 		playContentsButton.setBackground(new Color(102, 219, 81));
+		
+		
 		settingsButton = new JButton("TTS settings");
 		settingsButton.setFocusable(false);
 		settingsButton.setBackground(Color.GRAY.brighter());
