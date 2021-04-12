@@ -39,9 +39,9 @@ public class Text2SpeechEditorView implements ActionListener{
 	private JLabel encodingLabel;
 	private JButton settingsButton;
 	private JButton playContentsButton;
-	private double speechVolume= 0.5;
-	private int speechRate = 140;
-	private int speechPitch = 500;
+	private double speechVolume= 0.9;
+	private int speechRate = 150;
+	private int speechPitch = 150;
 	private DocumentToSpeech docToSp;
 	
 	@Override
@@ -69,7 +69,7 @@ public class Text2SpeechEditorView implements ActionListener{
 			JSlider rate = new JSlider(20,250,speechRate);
 			
 			JLabel pth = new JLabel("Pitch (Hz):");
-			JSlider pitch = new JSlider(50,2000,speechPitch);
+			JSlider pitch = new JSlider(50,300,speechPitch);
 			
 			volume.setMajorTickSpacing(20);
 			volume.setPaintTicks(true);
@@ -79,7 +79,7 @@ public class Text2SpeechEditorView implements ActionListener{
 			rate.setPaintTicks(true);
 			rate.setPaintLabels(true);
 			
-			pitch.setMajorTickSpacing(1950/2);
+			pitch.setMajorTickSpacing(250/2);
 			pitch.setPaintTicks(true);
 			pitch.setPaintLabels(true);
 			

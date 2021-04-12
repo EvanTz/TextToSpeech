@@ -25,6 +25,7 @@ public class DocumentToSpeech implements ActionListener{
 	private int pitch;
 	private int rate;
 	private double volume;
+	private boolean played = false;
 	
 	public DocumentToSpeech() {
 		rm = new ReplayManager();
@@ -40,21 +41,21 @@ public class DocumentToSpeech implements ActionListener{
 			if(doc.getPathTypeEncoding().get(1) == "docx" && textArea.getSelectedText()==null) {
 				playAllContents();
 			}
-			else if (doc.getPathTypeEncoding().get(1) == "xlsx" && table.getSelectedRows()==null) {
+			else if (doc.getPathTypeEncoding().get(1) == "xlsx" && table.getSelectedRows().length== 0) {
 				playAllContents();
 			}
 			// else play selected text/cells
 			else if(doc.getPathTypeEncoding().get(1) == "docx" && textArea.getSelectedText()!=null) {
 				playSelectedContents();
 			}
-			else if (doc.getPathTypeEncoding().get(1) == "xlsx" && table.getSelectedRows()!=null) {
+			else if (doc.getPathTypeEncoding().get(1) == "xlsx" && table.getSelectedRows().length != 0) {
 				playSelectedContents();
 			}
 			
 			if (!doc.getOpenState()) {
 				JOptionPane.showMessageDialog(null, "No file opened to be played to audio.","Warning",JOptionPane.PLAIN_MESSAGE);
 			}
-			else {
+			else{
 				playButton.setText("Stop Audio");
 				playButton.setBackground(new Color(232, 102, 93));
 			}
