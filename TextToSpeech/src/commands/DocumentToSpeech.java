@@ -55,13 +55,16 @@ public class DocumentToSpeech implements ActionListener{
 			else if (doc.getPathTypeEncoding().get(1) == "xlsx" && table.getSelectedRows().length != 0) {
 				playSelectedContents();
 			}
-			playButton.setEnabled(!played);
-			
+			if(played) {
+				playButton.setEnabled(!played);
+				playButton.setText("Click Stop");
+			}
 		}
 		else if(event.getSource() == stopButton && played) { 
 			doc.stopPlayingContents();
 			played = false;
 			playButton.setEnabled(!played);
+			playButton.setText("Play Audio");
 		}
 	}
 	
