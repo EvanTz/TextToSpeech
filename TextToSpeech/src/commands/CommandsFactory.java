@@ -18,8 +18,11 @@ public class CommandsFactory {
 		else if (str == "DocumentToSpeech"){
 			return new DocumentToSpeech();
 		}
+		else if (str == "ActionRecording"){
+			return new ActionRecording();
+		}
 		else {
-			// extra commands
+			// future extra commands
 			return null;
 		}
 		

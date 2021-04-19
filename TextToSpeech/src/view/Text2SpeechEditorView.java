@@ -44,6 +44,11 @@ public class Text2SpeechEditorView implements ActionListener{
 	private int speechRate = 150;
 	private int speechPitch = 150;
 	private DocumentToSpeech docToSp;
+	private JButton activateRecording;
+	private JButton playRecording;
+	private JButton stopRecording;
+	private ReplayManager rm;
+	private ActionRecording actionRec;
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -139,6 +144,22 @@ public class Text2SpeechEditorView implements ActionListener{
 		settingsButton.setFocusable(false);
 		settingsButton.setBackground(Color.GRAY.brighter());
 
+		activateRecording = new JButton("Record Actions");
+		activateRecording.setFocusable(false);
+		activateRecording.setPreferredSize(new Dimension(150,26));
+		activateRecording.setBackground(new Color(234,255,38));
+		
+		playRecording = new JButton("Replay Recorded Actions");
+		playRecording.setFocusable(false);
+		playRecording.setPreferredSize(new Dimension(180,26));
+		playRecording.setBackground(new Color(234,255,38));
+		
+		
+		stopRecording = new JButton("Clear Recorded Actions");
+		stopRecording.setFocusable(false);
+		stopRecording.setBackground(new Color(234,255,38));
+		
+		rm = new ReplayManager();
 		
 		textArea = new JTextArea();
 		textArea.setLineWrap(true);
@@ -179,17 +200,29 @@ public class Text2SpeechEditorView implements ActionListener{
 		docToSp.setTableModel(model);
 		docToSp.setTable(table);
 		docToSp.setVolRatePitch(speechVolume,speechRate,speechPitch);
+		docToSp.setReplayManager(rm);
 		
 		playContentsButton.addActionListener(docToSp);
 		stopPlayingButton.addActionListener(docToSp);
 		
+		actionRec = (ActionRecording) comFactory.createCommand("ActionRecording");
+		actionRec.setReplayManager(rm);
+		actionRec.setActivateRecButton(activateRecording);
+		actionRec.setPlayRecButton(playRecording);
+		actionRec.setStopRecButton(stopRecording);
+		actionRec.setStopAudioButton(stopPlayingButton);
+		
+		activateRecording.addActionListener(actionRec);
+		playRecording.addActionListener(actionRec);
+		stopRecording.addActionListener(actionRec);
+		stopPlayingButton.addActionListener(actionRec);
+		
+		rm.setDoc(openDoc.getDocument());
+		
 		encodingsList.addActionListener(this);
-
-
 
 		settingsButton.addActionListener(this);
 
-		
 		textPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		textPanel.setLayout(new GridLayout(1,0));
 		panel.add(openButton);
@@ -199,12 +232,15 @@ public class Text2SpeechEditorView implements ActionListener{
 		panel.add(settingsButton);
 		panel.add(playContentsButton);
 		panel.add(stopPlayingButton);
+		panel.add(playRecording);
+		panel.add(activateRecording);
+		panel.add(stopRecording);
 		textPanel.add(scroll);
 		frame.add(panel, BorderLayout.PAGE_START);
 		frame.add(textPanel, BorderLayout.CENTER);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Text2Speech");
-		frame.setPreferredSize(new Dimension(800,400));
+		frame.setPreferredSize(new Dimension(1200,600));
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);

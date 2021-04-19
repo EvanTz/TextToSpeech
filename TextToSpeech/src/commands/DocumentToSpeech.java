@@ -36,7 +36,7 @@ public class DocumentToSpeech implements ActionListener{
 	public void actionPerformed(ActionEvent event) {
 		// play and stop audio (change parameters in document), DONE
 		// all contents or selected contents, DONE 
-		// TODO if replay record is true record the move(add it to a list like rm.addplayContents(List<string> content).
+		// if replay record is true record the move(add it to a list like rm.addplayContents(List<string> content). DONE
 		if(event.getSource() == playButton){
 			if (!doc.getOpenState()) {
 				JOptionPane.showMessageDialog(null, "No file opened to be played to audio.","Warning",JOptionPane.PLAIN_MESSAGE);
@@ -74,7 +74,8 @@ public class DocumentToSpeech implements ActionListener{
 				List<String> play = new ArrayList<>();
 				play.add(textArea.getText());
 				if(rm.isActiveRecording()) {
-					// TODO here save the play value to a list in replay manager
+					//save the play value to a list in replay manager
+					rm.addContentsToRecList(play);
 				}
 				doc.setContents(play);
 				
@@ -96,7 +97,8 @@ public class DocumentToSpeech implements ActionListener{
 						out.add(line);
 					}
 					if(rm.isActiveRecording()) {
-						// TODO here save the out value(s) to a list in replay manager
+						//save the out value(s) to a list in replay manager
+						rm.addContentsToRecList(out);
 					}
 					doc.setContents(out);
 					doc.setVolRatePitchDoc(volume, rate, pitch);
@@ -118,7 +120,8 @@ public class DocumentToSpeech implements ActionListener{
 				List<String> play = new ArrayList<>();
 				play.add(textArea.getSelectedText());
 				if(rm.isActiveRecording()) {
-					// TODO here save the play value to a list in replay manager
+					//save the play value to a list in replay manager
+					rm.addContentsToRecList(play);
 				}
 				
 				doc.setVolRatePitchDoc(volume, rate, pitch);
@@ -128,7 +131,6 @@ public class DocumentToSpeech implements ActionListener{
 			}
 			else if (doc.getPathTypeEncoding().get(1) == "xlsx") {
 				if(!table.isEditing()) {
-					//String line = "";
 					List<String> out = new ArrayList<>();
 					int[] selectedRows = table.getSelectedRows();
 					int[] selectedColumns = table.getSelectedColumns();
@@ -138,7 +140,8 @@ public class DocumentToSpeech implements ActionListener{
 						}
 					}
 					if(rm.isActiveRecording()) {
-						// TODO here save the out value(s) to a list in replay manager
+						//save the out value(s) to a list in replay manager
+						rm.addContentsToRecList(out);
 					}
 					
 					doc.setVolRatePitchDoc(volume, rate, pitch);
@@ -167,7 +170,7 @@ public class DocumentToSpeech implements ActionListener{
 		this.stopButton = stopButton;
 	}
 	
-	public void ReplayManager(ReplayManager rm) {
+	public void setReplayManager(ReplayManager rm) {
 		this.rm = rm;
 	}
 
