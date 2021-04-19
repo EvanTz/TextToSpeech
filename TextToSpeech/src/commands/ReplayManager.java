@@ -11,6 +11,9 @@ public class ReplayManager {
 	private List<List<String>> recordList;
 	private Document doc;
 	private boolean playing;
+	private double volume;
+	private int rate;
+	private int pitch;
 
 	public ReplayManager() {
 		recordingStatus = false;
@@ -27,6 +30,7 @@ public class ReplayManager {
 			}
 		}
 		//System.out.println("Replay Manager Flag replay: "+out);
+		doc.setVolRatePitchDoc(volume, rate, pitch);
 		doc.playPartContents(out);
 	}
 	
@@ -58,6 +62,12 @@ public class ReplayManager {
 	
 	public void setDoc(Document doc) {
 		this.doc = doc;
+	}
+	
+	public void setVolRatePitch(double speechVolume, int speechRate, int speechPitch) {
+		this.volume = speechVolume;
+		this.rate = speechRate;
+		this.pitch = speechPitch;
 	}
 
 }

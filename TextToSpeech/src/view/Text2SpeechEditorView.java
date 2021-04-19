@@ -102,6 +102,7 @@ public class Text2SpeechEditorView implements ActionListener{
 	            speechRate = rate.getValue();
 	            speechPitch = pitch.getValue();
 	            docToSp.setVolRatePitch(speechVolume,speechRate,speechPitch);
+	            rm.setVolRatePitch(speechVolume, speechRate, speechPitch);
 			 }
 			
 		}
@@ -159,6 +160,7 @@ public class Text2SpeechEditorView implements ActionListener{
 		stopRecording.setBackground(Color.ORANGE);
 		
 		rm = new ReplayManager();
+		rm.setVolRatePitch(speechVolume, speechRate, speechPitch);
 		
 		textArea = new JTextArea();
 		textArea.setLineWrap(true);
