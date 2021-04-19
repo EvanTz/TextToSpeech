@@ -128,7 +128,7 @@ public class Text2SpeechEditorView implements ActionListener{
 		encodingsList = new JComboBox<String>(encodings);
 
 		encodingsList.setFocusable(false);
-		encodingsList.setBackground(Color.ORANGE);
+		encodingsList.setBackground(new Color(162, 235, 245));
 		
 		playContentsButton = new JButton("Play Audio");
 		playContentsButton.setFocusable(false);
@@ -147,17 +147,16 @@ public class Text2SpeechEditorView implements ActionListener{
 		activateRecording = new JButton("Record Actions");
 		activateRecording.setFocusable(false);
 		activateRecording.setPreferredSize(new Dimension(150,26));
-		activateRecording.setBackground(new Color(234,255,38));
+		activateRecording.setBackground(Color.ORANGE);
 		
 		playRecording = new JButton("Replay Recorded Actions");
 		playRecording.setFocusable(false);
 		playRecording.setPreferredSize(new Dimension(180,26));
-		playRecording.setBackground(new Color(234,255,38));
-		
+		playRecording.setBackground(Color.ORANGE);
 		
 		stopRecording = new JButton("Clear Recorded Actions");
 		stopRecording.setFocusable(false);
-		stopRecording.setBackground(new Color(234,255,38));
+		stopRecording.setBackground(Color.ORANGE);
 		
 		rm = new ReplayManager();
 		

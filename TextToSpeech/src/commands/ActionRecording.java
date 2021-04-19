@@ -32,7 +32,7 @@ public class ActionRecording implements ActionListener{
 		else if(e.getSource() == stopRecording & rm.isActiveRecording()) {
 			rm.endRecording();
 			activateRecording.setText("Record Actions");
-			activateRecording.setBackground(new Color(234,255,38));
+			activateRecording.setBackground(Color.ORANGE);
 		}
 		else if(e.getSource() == stopAudioButton) {
 			playRecording.setText("Replay Recorded Actions");
