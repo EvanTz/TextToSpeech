@@ -195,4 +195,7 @@ public class DocumentToSpeech implements ActionListener{
 		this.pitch = speechPitch;
 	}
 	
+	public void setPlayed(boolean played) {
+		this.played = played;
+	}
 }

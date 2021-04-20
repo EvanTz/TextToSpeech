@@ -21,14 +21,22 @@ public class ActionRecording implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == activateRecording) {
 			activateRec();
+			activateRecording.setText("Recording Actions");
+			activateRecording.setBackground(Color.RED);
 		}
 		else if(e.getSource() == playRecording) {
+			playRecording.setText("Click Stop Audio");
+			playRecording.setEnabled(false);
 			playRec();
 		}
 		else if(e.getSource() == stopRecording & rm.isActiveRecording()) {
 			endRec();
+			activateRecording.setText("Record Actions");
+			activateRecording.setBackground(Color.ORANGE);
 		}
 		else if(e.getSource() == stopAudioButton) {
+			playRecording.setText("Replay Recorded Actions");
+			playRecording.setEnabled(true);
 			stopSound();
 		}
 		
@@ -36,25 +44,17 @@ public class ActionRecording implements ActionListener{
 	
 	public void activateRec() {  // public for testing
 		rm.startRecording();
-		activateRecording.setText("Recording Actions");
-		activateRecording.setBackground(Color.RED);
 	}
 	
 	public void playRec() {  // public for testing
-		playRecording.setText("Click Stop Audio");
-		playRecording.setEnabled(false);
 		rm.replay();
 	}
 	
 	public void endRec() {  // public for testing
 		rm.endRecording();
-		activateRecording.setText("Record Actions");
-		activateRecording.setBackground(Color.ORANGE);
 	}
 	
 	public void stopSound() {  // public for testing
-		playRecording.setText("Replay Recorded Actions");
-		playRecording.setEnabled(true);
 		rm.stopAudio();
 	}
 

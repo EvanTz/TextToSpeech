@@ -29,7 +29,6 @@ public class ReplayManager {
 				out.add(word);
 			}
 		}
-		//System.out.println("Replay Manager Flag replay: "+out);
 		doc.setVolRatePitchDoc(volume, rate, pitch);
 		doc.playPartContents(out);
 	}
