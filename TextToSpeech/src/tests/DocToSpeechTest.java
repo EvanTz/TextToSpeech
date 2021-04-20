@@ -100,6 +100,17 @@ class DocToSpeechTest {
 		dts.setTextArea(textArea);
 		dts.playAllContents();
 		assertEquals(text, fakeTTS.getPlayedContents());
+		
+		// wait before stopping playing contents
+		try {
+			Thread.sleep(5);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		// test that speaking stops
+		doc.stopPlayingContents();
+		assertEquals(false, fakeTTS.getPlayingStatus());
 	}
 	
 	@Test
