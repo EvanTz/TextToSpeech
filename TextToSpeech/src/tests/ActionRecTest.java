@@ -7,7 +7,6 @@ import javax.swing.JTextArea;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import commands.ActionRecording;
 import commands.DocumentToSpeech;
 import commands.EndRecording;
 import commands.ReplayCommand;
