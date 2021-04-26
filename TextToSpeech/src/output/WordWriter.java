@@ -17,7 +17,7 @@ public class WordWriter implements DocumentWriter {
 	private List<String> content;
 
 	public WordWriter(String docPath, List<String> content)  {
-		// TODO Auto-generated constructor stub
+		//  Auto-generated constructor stub
 		this.docPath = docPath;
 		this.content = content;
 

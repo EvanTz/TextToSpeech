@@ -12,12 +12,10 @@ public class StartRecording implements ActionListener {
 	private JButton activateRecording;
 
 	public StartRecording() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 		activateRec();
 		activateRecording.setText("Recording Actions");
 		activateRecording.setBackground(Color.RED);

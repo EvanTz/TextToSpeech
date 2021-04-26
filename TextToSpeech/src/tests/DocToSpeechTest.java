@@ -103,7 +103,7 @@ class DocToSpeechTest {
 		
 		// wait before stopping playing contents
 		try {
-			Thread.sleep(5);
+			Thread.sleep(10);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

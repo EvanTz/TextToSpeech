@@ -12,7 +12,7 @@ public class TTSFacade {
 	private Thread speakerThread;
 	private boolean finished;
 	public TTSFacade() {
-		// TODO Auto-generated constructor stub
+		//  Auto-generated constructor stub
 		
 		 
 	}
