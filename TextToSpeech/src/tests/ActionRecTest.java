@@ -2,8 +2,6 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-
 import javax.swing.JTextArea;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -11,7 +9,10 @@ import org.junit.jupiter.api.Test;
 
 import commands.ActionRecording;
 import commands.DocumentToSpeech;
+import commands.EndRecording;
+import commands.ReplayCommand;
 import commands.ReplayManager;
+import commands.StartRecording;
 import model.Document;
 import model.FakeTTSFacade;
 
@@ -21,11 +22,13 @@ class ActionRecTest {
 	private static String sampleInput;
 	private static DocumentToSpeech docToSpeech;
 	private static ReplayManager rm;
-	private static ActionRecording actionRec;
 	private static String text1;
 	private static String text2;
 	private static String text3;
 	private static String expected_out;
+	private static StartRecording startRec;
+	private static EndRecording endRec;
+	private static ReplayCommand replayRec;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -46,8 +49,13 @@ class ActionRecTest {
 		
 		docToSpeech.setReplayManager(rm);
 		
-		actionRec = new ActionRecording();
-		actionRec.setReplayManager(rm);
+		startRec = new StartRecording();
+		endRec = new EndRecording();
+		replayRec = new ReplayCommand();
+		
+		startRec.setReplayManager(rm);
+		endRec.setReplayManager(rm);
+		replayRec.setReplayManager(rm);
 		
 		text1 = "this is the 1st text to speech command";
 		text2 = "this is the 2nd text to speech command";
@@ -59,13 +67,13 @@ class ActionRecTest {
 	@Test
 	void startRecTest() {
 		assertEquals(false, rm.isActiveRecording());
-		actionRec.activateRec();
+		startRec.activateRec();
 		assertEquals(true, rm.isActiveRecording());
 	}
 	
 	@Test
 	void replayRecTest() {
-		actionRec.activateRec();
+		startRec.activateRec();
 		JTextArea textArea = new JTextArea();
 		docToSpeech.setTextArea(textArea);
 		
@@ -80,16 +88,16 @@ class ActionRecTest {
 		textArea.setText(text3);
 		docToSpeech.playAllContents();
 		
-		actionRec.playRec();
+		replayRec.playRec();
 		assertEquals(expected_out, fakeTTS.getPlayedContents());
 		
 	}
 	
 	@Test
 	void endRecTest() {
-		actionRec.activateRec();
+		startRec.activateRec();
 		assertEquals(true, rm.isActiveRecording());
-		actionRec.endRec();
+		endRec.endRec();
 		assertEquals(false, rm.isActiveRecording());
 	}
 
