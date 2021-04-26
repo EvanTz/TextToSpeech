@@ -47,8 +47,11 @@ public class Text2SpeechEditorView implements ActionListener{
 	private JButton activateRecording;
 	private JButton playRecording;
 	private JButton stopRecording;
+	
 	private ReplayManager rm;
-	private ActionRecording actionRec;
+	private StartRecording startRec;
+	private EndRecording endRec;
+	private ReplayCommand replayRec;
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -206,17 +209,25 @@ public class Text2SpeechEditorView implements ActionListener{
 		playContentsButton.addActionListener(docToSp);
 		stopPlayingButton.addActionListener(docToSp);
 		
-		actionRec = (ActionRecording) comFactory.createCommand("ActionRecording");
-		actionRec.setReplayManager(rm);
-		actionRec.setActivateRecButton(activateRecording);
-		actionRec.setPlayRecButton(playRecording);
-		actionRec.setStopRecButton(stopRecording);
-		actionRec.setStopAudioButton(stopPlayingButton);
+		startRec = (StartRecording) comFactory.createCommand("StartRecording");
+		startRec.setReplayManager(rm);
+		startRec.setActivateRecButton(activateRecording);
 		
-		activateRecording.addActionListener(actionRec);
-		playRecording.addActionListener(actionRec);
-		stopRecording.addActionListener(actionRec);
-		stopPlayingButton.addActionListener(actionRec);
+		activateRecording.addActionListener(startRec);
+		
+		endRec = (EndRecording) comFactory.createCommand("EndRecording");
+		endRec.setReplayManager(rm);
+		endRec.setActivateRecButton(activateRecording);
+		
+		stopRecording.addActionListener(endRec);
+		
+		replayRec = (ReplayCommand) comFactory.createCommand("ReplayCommand");
+		replayRec.setReplayManager(rm);
+		replayRec.setPlayRecButton(playRecording);
+		replayRec.setStopAudioButton(stopPlayingButton);
+		
+		playRecording.addActionListener(replayRec);
+		stopPlayingButton.addActionListener(replayRec);
 		
 		rm.setDoc(openDoc.getDocument());
 		
